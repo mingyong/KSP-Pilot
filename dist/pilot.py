@@ -127,8 +127,8 @@ class Pilot():
                     logging.info(text.format(vessel.flight().mean_altitude, vessel.flight().speed))
                 
                 time.sleep(1)
+        
         elif cmd[0] == 'fly':
-            
             print('正在准备起飞…')
             logging.info('正在准备起飞…')
             
@@ -141,8 +141,10 @@ class Pilot():
             
             print('倒计时：2秒')
             logging.info('倒计时：2秒')
-            vessel.auto_pilot.reference_frame = vessel.surface_reference_frame
-            vessel.auto_pilot.target_pitch_and_heading(5, 90)
+            # vessel.auto_pilot.reference_frame = self.conn.space_center.node.reference_frame
+            # vessel.auto_pilot.target_pitch_and_heading(10, 90)
+            vessel.auto_pilot.target_pitch = 10
+            vessel.auto_pilot.target_heading = 90
             vessel.auto_pilot.target_roll = 0
             vessel.auto_pilot.engage()
             time.sleep(1)
@@ -166,8 +168,7 @@ class Pilot():
             vessel.control.gear = False
             
             while True:
-                print(vessel.flight().mean_altitude)
-                time.sleep(0.1)
+                pass
     
     def getHash(self):
         m = hashlib.md5()
